@@ -1,0 +1,22 @@
+project_id = "fjqzdxvgztcznlhxqbgn"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public"]
+max_rows = 1000
+
+[functions.suggest-use-cases]
+verify_jwt = false
+
+[functions.validate-data-coherence]
+verify_jwt = false
+
+[functions.alan-chat]
+verify_jwt = false
+
+[functions.admin-create-user]
+verify_jwt = true
+
+[functions.admin-delete-user]
+verify_jwt = true
