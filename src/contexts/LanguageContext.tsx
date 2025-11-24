@@ -96,6 +96,21 @@ const translations: Record<Language, Record<string, string>> = {
     'home.cta.button': 'Iniciar Evaluación Gratuita',
     'home.footer.rights': '© 2025 OVM Consulting - Todos los derechos reservados',
     'home.footer.terms': 'Términos y Condiciones de Uso',
+
+    // Chat
+    'chat.greeting.user': '¡Hola {name}! Soy Alan, tu asistente de OVM Consulting. ¿En qué puedo ayudarte hoy?',
+    'chat.greeting.guest': '¡Hola! Soy Alan, tu asistente de OVM Consulting. ¿En qué puedo ayudarte hoy?',
+    'chat.title': 'Asistente Virtual OVM',
+    'chat.placeholder': 'Escribe tu mensaje...',
+    'chat.welcome.title': '¡Hola! Soy Alan',
+    'chat.welcome.desc': '¿Tienes dudas sobre diagnóstico de IA? Estoy aquí para ayudarte.',
+    'chat.connect.expert': 'Conectar con experto de OVM',
+    'chat.form.title': 'Ingresa tus datos para contactar con OVM',
+    'chat.form.name': 'Tu nombre',
+    'chat.form.email': 'Tu email',
+    'chat.form.phone': 'Tu teléfono (opcional)',
+    'chat.send': 'Enviar',
+    'chat.cancel': 'Cancelar',
   },
   en: {
     // Navigation
@@ -182,6 +197,21 @@ const translations: Record<Language, Record<string, string>> = {
     'home.cta.button': 'Start Free Assessment',
     'home.footer.rights': '© 2025 OVM Consulting - All rights reserved',
     'home.footer.terms': 'Terms and Conditions',
+
+    // Chat
+    'chat.greeting.user': 'Hello {name}! I am Alan, your OVM Consulting assistant. How can I help you today?',
+    'chat.greeting.guest': 'Hello! I am Alan, your OVM Consulting assistant. How can I help you today?',
+    'chat.title': 'OVM Virtual Assistant',
+    'chat.placeholder': 'Type your message...',
+    'chat.welcome.title': 'Hello! I am Alan',
+    'chat.welcome.desc': 'Do you have questions about AI diagnosis? I am here to help.',
+    'chat.connect.expert': 'Connect with OVM expert',
+    'chat.form.title': 'Enter your details to contact OVM',
+    'chat.form.name': 'Your name',
+    'chat.form.email': 'Your email',
+    'chat.form.phone': 'Your phone (optional)',
+    'chat.send': 'Send',
+    'chat.cancel': 'Cancel',
   },
   pt: {
     // Navigation
@@ -268,6 +298,21 @@ const translations: Record<Language, Record<string, string>> = {
     'home.cta.button': 'Iniciar Avaliação Gratuita',
     'home.footer.rights': '© 2025 OVM Consulting - Todos os direitos reservados',
     'home.footer.terms': 'Termos e Condições de Uso',
+
+    // Chat
+    'chat.greeting.user': 'Olá {name}! Sou Alan, seu assistente da OVM Consulting. Como posso ajudar hoje?',
+    'chat.greeting.guest': 'Olá! Sou Alan, seu assistente da OVM Consulting. Como posso ajudar hoje?',
+    'chat.title': 'Assistente Virtual OVM',
+    'chat.placeholder': 'Digite sua mensagem...',
+    'chat.welcome.title': 'Olá! Sou Alan',
+    'chat.welcome.desc': 'Tem dúvidas sobre diagnóstico de IA? Estou aqui para ajudar.',
+    'chat.connect.expert': 'Conectar com especialista OVM',
+    'chat.form.title': 'Insira seus dados para contatar a OVM',
+    'chat.form.name': 'Seu nome',
+    'chat.form.email': 'Seu email',
+    'chat.form.phone': 'Seu telefone (opcional)',
+    'chat.send': 'Enviar',
+    'chat.cancel': 'Cancelar',
   },
   it: {
     // Navigation
@@ -354,6 +399,21 @@ const translations: Record<Language, Record<string, string>> = {
     'home.cta.button': 'Inizia Valutazione Gratuita',
     'home.footer.rights': '© 2025 OVM Consulting - Tutti i diritti riservati',
     'home.footer.terms': 'Termini e Condizioni d\'Uso',
+
+    // Chat
+    'chat.greeting.user': 'Ciao {name}! Sono Alan, il tuo assistente OVM Consulting. Come posso aiutarti oggi?',
+    'chat.greeting.guest': 'Ciao! Sono Alan, il tuo assistente OVM Consulting. Come posso aiutarti oggi?',
+    'chat.title': 'Assistente Virtuale OVM',
+    'chat.placeholder': 'Scrivi il tuo messaggio...',
+    'chat.welcome.title': 'Ciao! Sono Alan',
+    'chat.welcome.desc': 'Hai domande sulla diagnosi AI? Sono qui per aiutarti.',
+    'chat.connect.expert': 'Connettiti con un esperto OVM',
+    'chat.form.title': 'Inserisci i tuoi dati per contattare OVM',
+    'chat.form.name': 'Il tuo nome',
+    'chat.form.email': 'La tua email',
+    'chat.form.phone': 'Il tuo telefono (opzionale)',
+    'chat.send': 'Invia',
+    'chat.cancel': 'Annulla',
   },
   de: {
     // Navigation
@@ -440,6 +500,21 @@ const translations: Record<Language, Record<string, string>> = {
     'home.cta.button': 'Kostenlose Bewertung Starten',
     'home.footer.rights': '© 2025 OVM Consulting - Alle Rechte vorbehalten',
     'home.footer.terms': 'Nutzungsbedingungen',
+
+    // Chat
+    'chat.greeting.user': 'Hallo {name}! Ich bin Alan, Ihr OVM Consulting Assistent. Wie kann ich Ihnen heute helfen?',
+    'chat.greeting.guest': 'Hallo! Ich bin Alan, Ihr OVM Consulting Assistent. Wie kann ich Ihnen heute helfen?',
+    'chat.title': 'Virtueller Assistent OVM',
+    'chat.placeholder': 'Schreiben Sie Ihre Nachricht...',
+    'chat.welcome.title': 'Hallo! Ich bin Alan',
+    'chat.welcome.desc': 'Haben Sie Fragen zur KI-Diagnose? Ich bin hier, um zu helfen.',
+    'chat.connect.expert': 'Mit OVM-Experten verbinden',
+    'chat.form.title': 'Geben Sie Ihre Daten ein, um OVM zu kontaktieren',
+    'chat.form.name': 'Ihr Name',
+    'chat.form.email': 'Ihre E-Mail',
+    'chat.form.phone': 'Ihr Telefon (optional)',
+    'chat.send': 'Senden',
+    'chat.cancel': 'Abbrechen',
   },
   fr: {
     // Navigation
@@ -526,6 +601,21 @@ const translations: Record<Language, Record<string, string>> = {
     'home.cta.button': 'Commencer l\'Évaluation Gratuite',
     'home.footer.rights': '© 2025 OVM Consulting - Tous droits réservés',
     'home.footer.terms': 'Conditions Générales d\'Utilisation',
+
+    // Chat
+    'chat.greeting.user': 'Bonjour {name} ! Je suis Alan, votre assistant OVM Consulting. Comment puis-je vous aider aujourd\'hui ?',
+    'chat.greeting.guest': 'Bonjour ! Je suis Alan, votre assistant OVM Consulting. Comment puis-je vous aider aujourd\'hui ?',
+    'chat.title': 'Assistant Virtuel OVM',
+    'chat.placeholder': 'Écrivez votre message...',
+    'chat.welcome.title': 'Bonjour ! Je suis Alan',
+    'chat.welcome.desc': 'Avez-vous des questions sur le diagnostic IA ? Je suis là pour vous aider.',
+    'chat.connect.expert': 'Contacter un expert OVM',
+    'chat.form.title': 'Entrez vos coordonnées pour contacter OVM',
+    'chat.form.name': 'Votre nom',
+    'chat.form.email': 'Votre email',
+    'chat.form.phone': 'Votre téléphone (optionnel)',
+    'chat.send': 'Envoyer',
+    'chat.cancel': 'Annuler',
   },
 };
 

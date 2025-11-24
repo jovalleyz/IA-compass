@@ -10,6 +10,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { MessageContent } from './MessageContent';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -36,13 +37,14 @@ export const AlanChatWidget = () => {
   const [adminAssigned, setAdminAssigned] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const { user } = useAuth();
+  const { t, language } = useLanguage();
 
   // Show welcome popup after 10 seconds for non-authenticated users
   useEffect(() => {
     if (!user && !isOpen) {
       const showTimer = setTimeout(() => {
         setShowWelcomePopup(true);
-        
+
         // Hide after 5 seconds
         const hideTimer = setTimeout(() => {
           setShowWelcomePopup(false);
@@ -62,24 +64,33 @@ export const AlanChatWidget = () => {
   }, [user]);
 
   useEffect(() => {
-    if (userProfile && user && messages.length === 0) {
-      // Only set personalized message for authenticated users
-      setMessages([
-        {
-          role: 'assistant',
-          content: `¡Hola ${userProfile.nombre}! Soy Alan, tu asistente de OVM Consulting. ¿En qué puedo ayudarte hoy?`
-        }
-      ]);
-    } else if (!user && isOpen && messages.length === 0) {
-      // Generic message for non-authenticated users (no session saving)
-      setMessages([
-        {
-          role: 'assistant',
-          content: '¡Hola! Soy Alan, tu asistente de OVM Consulting. ¿En qué puedo ayudarte hoy?'
-        }
-      ]);
+    // Reset messages when language changes to force new greeting
+    if (messages.length > 0 && messages.length <= 1) {
+      setMessages([]);
     }
-  }, [userProfile, user, isOpen, messages.length]);
+  }, [language]);
+
+  useEffect(() => {
+    if (messages.length === 0) {
+      if (userProfile && user) {
+        // Only set personalized message for authenticated users
+        setMessages([
+          {
+            role: 'assistant',
+            content: t('chat.greeting.user').replace('{name}', userProfile.nombre)
+          }
+        ]);
+      } else if (!user && isOpen) {
+        // Generic message for non-authenticated users (no session saving)
+        setMessages([
+          {
+            role: 'assistant',
+            content: t('chat.greeting.guest')
+          }
+        ]);
+      }
+    }
+  }, [userProfile, user, isOpen, messages.length, t]);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -114,7 +125,7 @@ export const AlanChatWidget = () => {
 
     try {
       const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/alan-chat`;
-      
+
       const response = await fetch(CHAT_URL, {
         method: 'POST',
         headers: {
@@ -124,6 +135,7 @@ export const AlanChatWidget = () => {
         body: JSON.stringify({
           messages: [...messages, userMessage],
           userName: userProfile?.nombre,
+          language: language, // Pass current language to backend
         }),
       });
 
@@ -144,7 +156,7 @@ export const AlanChatWidget = () => {
 
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
-      
+
       if (!reader) throw new Error('No se pudo iniciar el stream');
 
       let assistantMessage = '';
@@ -158,7 +170,7 @@ export const AlanChatWidget = () => {
         if (done) break;
 
         textBuffer += decoder.decode(value, { stream: true });
-        
+
         let newlineIndex: number;
         while ((newlineIndex = textBuffer.indexOf('\n')) !== -1) {
           let line = textBuffer.slice(0, newlineIndex);
@@ -174,10 +186,10 @@ export const AlanChatWidget = () => {
           try {
             const parsed = JSON.parse(jsonStr);
             const content = parsed.choices?.[0]?.delta?.content;
-            
+
             if (content) {
               assistantMessage += content;
-              
+
               // Update the last message
               setMessages(prev => {
                 const newMessages = [...prev];
@@ -189,9 +201,9 @@ export const AlanChatWidget = () => {
               });
 
               // Check if Alan suggests connecting with a human
-              if (assistantMessage.toLowerCase().includes('conecte con') || 
-                  assistantMessage.toLowerCase().includes('equipo de ovm') ||
-                  assistantMessage.toLowerCase().includes('experto')) {
+              if (assistantMessage.toLowerCase().includes('conecte con') ||
+                assistantMessage.toLowerCase().includes('equipo de ovm') ||
+                assistantMessage.toLowerCase().includes('experto')) {
                 setShowHumanSupport(true);
               }
             }
@@ -203,7 +215,7 @@ export const AlanChatWidget = () => {
     } catch (error) {
       console.error('Error in chat:', error);
       toast.error('Error al comunicarse con Alan');
-      
+
       // Remove the empty assistant message if there was an error
       setMessages(prev => prev.filter((_, i) => i !== prev.length - 1));
     } finally {
@@ -235,7 +247,7 @@ export const AlanChatWidget = () => {
 
       // Add initial message with chat history
       const chatHistory = messages.map(m => `${m.role === 'user' ? 'Usuario' : 'Alan'}: ${m.content}`).join('\n\n');
-      
+
       const { error: msgError } = await supabase
         .from('support_messages')
         .insert({
@@ -302,7 +314,7 @@ export const AlanChatWidget = () => {
 
       // Add initial message with chat history
       const chatHistory = messages.map(m => `${m.role === 'user' ? contactName : 'Alan'}: ${m.content}`).join('\n\n');
-      
+
       const { error: msgError } = await supabase
         .from('support_messages')
         .insert({
@@ -328,18 +340,18 @@ export const AlanChatWidget = () => {
           async (payload) => {
             const newMessage = payload.new as any;
             console.log('New message received:', newMessage);
-            
+
             // Only show messages from admin (sender_id exists and is not AI)
             if (newMessage.sender_id && !newMessage.is_ai) {
               console.log('Admin message detected, adding to chat');
               setMessages(prev => {
                 // Avoid duplicates
-                const exists = prev.some(m => 
-                  m.role === 'assistant' && 
+                const exists = prev.some(m =>
+                  m.role === 'assistant' &&
                   m.content === newMessage.content
                 );
                 if (exists) return prev;
-                
+
                 return [...prev, {
                   role: 'assistant',
                   content: newMessage.content
@@ -401,10 +413,10 @@ export const AlanChatWidget = () => {
         >
           <Bot className="h-6 w-6" />
         </Button>
-        
+
         {/* Welcome popup message */}
         {showWelcomePopup && (
-          <div 
+          <div
             className="fixed bottom-40 right-6 bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4 z-40 max-w-xs animate-in fade-in slide-in-from-bottom-4 duration-500"
             style={{
               animation: 'fadeIn 0.5s ease-in-out'
@@ -415,9 +427,9 @@ export const AlanChatWidget = () => {
                 <Bot className="h-4 w-4 text-primary-foreground" />
               </div>
               <div className="flex-1">
-                <p className="text-sm font-medium mb-1">¡Hola! Soy Alan</p>
+                <p className="text-sm font-medium mb-1">{t('chat.welcome.title')}</p>
                 <p className="text-xs text-muted-foreground">
-                  ¿Tienes dudas sobre diagnóstico de IA? Estoy aquí para ayudarte.
+                  {t('chat.welcome.desc')}
                 </p>
               </div>
               <button
@@ -441,7 +453,7 @@ export const AlanChatWidget = () => {
           <Bot className="h-5 w-5" />
           <div>
             <h3 className="font-semibold">Alan</h3>
-            <p className="text-xs opacity-90">Asistente Virtual OVM</p>
+            <p className="text-xs opacity-90">{t('chat.title')}</p>
           </div>
         </div>
         <Button
@@ -502,21 +514,21 @@ export const AlanChatWidget = () => {
       {/* Contact Form for Non-Authenticated Users */}
       {showContactForm && (
         <div className="p-4 border-t bg-muted/50 space-y-3">
-          <p className="text-sm font-medium">Ingresa tus datos para contactar con OVM</p>
+          <p className="text-sm font-medium">{t('chat.form.title')}</p>
           <Input
-            placeholder="Tu nombre"
+            placeholder={t('chat.form.name')}
             value={contactName}
             onChange={(e) => setContactName(e.target.value)}
           />
           <Input
             type="email"
-            placeholder="Tu email"
+            placeholder={t('chat.form.email')}
             value={contactEmail}
             onChange={(e) => setContactEmail(e.target.value)}
           />
           <Input
             type="tel"
-            placeholder="Tu teléfono (opcional)"
+            placeholder={t('chat.form.phone')}
             value={contactPhone}
             onChange={(e) => setContactPhone(e.target.value)}
           />
@@ -526,7 +538,7 @@ export const AlanChatWidget = () => {
               className="flex-1"
               size="sm"
             >
-              Enviar
+              {t('chat.send')}
             </Button>
             <Button
               onClick={() => {
@@ -538,7 +550,7 @@ export const AlanChatWidget = () => {
               variant="outline"
               size="sm"
             >
-              Cancelar
+              {t('chat.cancel')}
             </Button>
           </div>
         </div>
@@ -554,7 +566,7 @@ export const AlanChatWidget = () => {
             size="sm"
           >
             <UserIcon className="h-4 w-4 mr-2" />
-            Conectar con experto de OVM
+            {t('chat.connect.expert')}
           </Button>
         </div>
       )}
@@ -563,7 +575,7 @@ export const AlanChatWidget = () => {
       <div className="p-4 border-t">
         <div className="flex gap-2">
           <Input
-            placeholder="Escribe tu mensaje..."
+            placeholder={t('chat.placeholder')}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => {
