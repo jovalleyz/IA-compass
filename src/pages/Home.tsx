@@ -53,23 +53,23 @@ const Home = () => {
             </div>
             <nav className="hidden md:flex items-center gap-6">
               <a href="#framework" className="text-sm font-medium hover:text-primary transition-colors">
-                Framework
+                {t('nav.framework')}
               </a>
               <a href="#beneficios" className="text-sm font-medium hover:text-primary transition-colors">
-                Beneficios
+                {t('nav.benefits')}
               </a>
               <a href="#casos-exito" className="text-sm font-medium hover:text-primary transition-colors">
-                Casos de Éxito
+                {t('nav.successStories')}
               </a>
               <a href="#estadisticas" className="text-sm font-medium hover:text-primary transition-colors">
-                Estadísticas
+                {t('nav.statistics')}
               </a>
             </nav>
             <div className="flex items-center gap-2">
               <ThemeToggle />
               <LanguageSelector />
               <Button onClick={() => navigate('/login')}>
-                Iniciar Sesión
+                {t('nav.login')}
               </Button>
             </div>
           </div>
@@ -80,19 +80,18 @@ const Home = () => {
       <section className="container mx-auto px-4 py-12 md:py-20 text-center">
         <div className="max-w-4xl mx-auto space-y-4 md:space-y-6">
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-            Framework de Madurez de IA Empresarial
+            {t('home.hero.title')}
           </h1>
           <p className="text-base md:text-xl text-muted-foreground px-4">
-            Metodología probada para identificar, evaluar y priorizar casos de uso de Inteligencia Artificial
-            que generen valor real para su organización
+            {t('home.hero.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 md:pt-8">
             <Button size="lg" onClick={() => navigate('/dashboard')} className="gap-2 w-full sm:w-auto">
-              Comenzar Evaluación
+              {t('home.hero.cta')}
               <ArrowRight className="h-4 w-4" />
             </Button>
             <Button size="lg" variant="outline" onClick={() => document.getElementById('framework')?.scrollIntoView({ behavior: 'smooth' })} className="w-full sm:w-auto">
-              Conocer más
+              {t('home.hero.learnMore')}
             </Button>
           </div>
         </div>
@@ -102,9 +101,9 @@ const Home = () => {
       <section id="framework" className="container mx-auto px-4 py-20 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">¿Qué es el Framework de Madurez de IA?</h2>
+            <h2 className="text-4xl font-bold mb-4">{t('home.framework.title')}</h2>
             <p className="text-xl text-muted-foreground">
-              Una metodología estructurada basada en las mejores prácticas de McKinsey, Deloitte y BCG
+              {t('home.framework.subtitle')}
             </p>
           </div>
 
@@ -112,12 +111,11 @@ const Home = () => {
             <Card>
               <CardHeader>
                 <Target className="h-12 w-12 text-primary mb-4" />
-                <CardTitle>Diagnóstico Estratégico</CardTitle>
+                <CardTitle>{t('home.framework.diagnosis.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Evalúe la madurez actual de su organización en 5 dimensiones clave:
-                  estrategia, datos, tecnología, talento y procesos.
+                  {t('home.framework.diagnosis.desc')}
                 </p>
               </CardContent>
             </Card>
@@ -125,12 +123,11 @@ const Home = () => {
             <Card>
               <CardHeader>
                 <Brain className="h-12 w-12 text-primary mb-4" />
-                <CardTitle>Identificación de Casos</CardTitle>
+                <CardTitle>{t('home.framework.identification.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Catálogo curado con más de 100 casos de uso probados en diferentes industrias,
-                  adaptados a su contexto específico.
+                  {t('home.framework.identification.desc')}
                 </p>
               </CardContent>
             </Card>
@@ -138,12 +135,11 @@ const Home = () => {
             <Card>
               <CardHeader>
                 <BarChart3 className="h-12 w-12 text-primary mb-4" />
-                <CardTitle>Priorización Inteligente</CardTitle>
+                <CardTitle>{t('home.framework.prioritization.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Matriz de impacto vs esfuerzo, análisis de gaps de madurez y roadmap detallado
-                  para implementación.
+                  {t('home.framework.prioritization.desc')}
                 </p>
               </CardContent>
             </Card>
@@ -155,9 +151,9 @@ const Home = () => {
       <section id="beneficios" className="container mx-auto px-4 py-20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">¿Por qué usar este Framework?</h2>
+            <h2 className="text-4xl font-bold mb-4">{t('home.benefits.title')}</h2>
             <p className="text-xl text-muted-foreground">
-              Beneficios comprobados y metodologías de las principales consultoras
+              {t('home.benefits.subtitle')}
             </p>
           </div>
 
@@ -166,9 +162,9 @@ const Home = () => {
               <div className="flex gap-4">
                 <CheckCircle className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">Reduce el tiempo de decisión en 60%</h3>
+                  <h3 className="font-semibold text-lg mb-2">{t('home.benefits.time.title')}</h3>
                   <p className="text-muted-foreground">
-                    Proceso estructurado que elimina meses de análisis ad-hoc y alinea a stakeholders
+                    {t('home.benefits.time.desc')}
                   </p>
                 </div>
               </div>
@@ -176,9 +172,9 @@ const Home = () => {
               <div className="flex gap-4">
                 <CheckCircle className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">Aumenta el ROI de proyectos IA en 3x</h3>
+                  <h3 className="font-semibold text-lg mb-2">{t('home.benefits.roi.title')}</h3>
                   <p className="text-muted-foreground">
-                    Priorización basada en datos que maximiza el retorno de inversión
+                    {t('home.benefits.roi.desc')}
                   </p>
                 </div>
               </div>
@@ -186,9 +182,9 @@ const Home = () => {
               <div className="flex gap-4">
                 <CheckCircle className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">Metodología probada en 500+ empresas</h3>
+                  <h3 className="font-semibold text-lg mb-2">{t('home.benefits.proven.title')}</h3>
                   <p className="text-muted-foreground">
-                    Basado en frameworks de McKinsey Analytics, Deloitte AI Institute y BCG Gamma
+                    {t('home.benefits.proven.desc')}
                   </p>
                 </div>
               </div>
@@ -248,9 +244,9 @@ const Home = () => {
       <section id="estadisticas" className="container mx-auto px-4 py-20 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Estadísticas Globales</h2>
+            <h2 className="text-4xl font-bold mb-4">{t('home.stats.title')}</h2>
             <p className="text-xl text-muted-foreground">
-              Datos reales de organizaciones que han usado el framework
+              {t('home.stats.subtitle')}
             </p>
           </div>
 
@@ -261,7 +257,7 @@ const Home = () => {
                   <div className="text-5xl font-bold text-primary mb-2">
                     {stats?.total_evaluaciones || '0'}
                   </div>
-                  <div className="text-lg font-normal">Evaluaciones Completadas</div>
+                  <div className="text-lg font-normal">{t('home.stats.evaluations')}</div>
                 </CardTitle>
               </CardHeader>
             </Card>
@@ -272,7 +268,7 @@ const Home = () => {
                   <div className="text-5xl font-bold text-primary mb-2">
                     {stats?.promedio_madurez?.toFixed(1) || '0'}
                   </div>
-                  <div className="text-lg font-normal">Madurez Promedio</div>
+                  <div className="text-lg font-normal">{t('home.stats.maturity')}</div>
                 </CardTitle>
               </CardHeader>
             </Card>
@@ -283,7 +279,7 @@ const Home = () => {
                   <div className="text-5xl font-bold text-primary mb-2">
                     100+
                   </div>
-                  <div className="text-lg font-normal">Casos de Uso</div>
+                  <div className="text-lg font-normal">{t('home.stats.cases')}</div>
                 </CardTitle>
               </CardHeader>
             </Card>
@@ -296,13 +292,13 @@ const Home = () => {
         <Card className="bg-gradient-to-r from-primary to-secondary text-primary-foreground">
           <CardContent className="p-12 text-center">
             <h2 className="text-4xl font-bold mb-4">
-              ¿Listo para transformar su organización con IA?
+              {t('home.cta.title')}
             </h2>
             <p className="text-xl mb-8 opacity-90">
-              Comience su evaluación gratuita hoy y descubra el potencial de la IA en su empresa
+              {t('home.cta.subtitle')}
             </p>
             <Button size="lg" variant="secondary" onClick={() => navigate('/dashboard')} className="gap-2">
-              Iniciar Evaluación Gratuita
+              {t('home.cta.button')}
               <ArrowRight className="h-4 w-4" />
             </Button>
           </CardContent>
@@ -314,10 +310,10 @@ const Home = () => {
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              © 2025 OVM Consulting - Todos los derechos reservados
+              {t('home.footer.rights')}
             </p>
             <a href="/terms" className="text-sm text-primary hover:underline">
-              Términos y Condiciones de Uso
+              {t('home.footer.terms')}
             </a>
           </div>
         </div>
